@@ -12,15 +12,9 @@ fi
 sed -i "s,__DOCROOT__,${DOCROOT}," /etc/nginx/nginx.conf
 sed -i "s,__DOCROOT__,${DOCROOT}," /etc/php/php-fpm.conf
 
-# start php-fpm
-#mkdir -p /www/logs/php-fpm
-php-fpm
-
 # start nginx
 #mkdir -p /www/logs/nginx
 mkdir -p /tmp/nginx
 chown nginx /tmp/nginx
 
-sleep 1
-
-supervisord --nodaemon --configuration /etc/supervisord.conf
+php-fpm
