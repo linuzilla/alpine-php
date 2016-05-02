@@ -5,6 +5,7 @@ COPY files/nginx.conf /etc/nginx/
 COPY files/php-fpm.conf /etc/php/
 COPY files/10php-fpm.sh /etc/init-scripts
 COPY files/supervisord-nginx.conf /etc/supervisor.d/nginx.conf
+COPY files/supervisord-phpfpm.conf /etc/supervisor.d/php-fpm.conf
 
 RUN apk update \
     && apk add nginx ca-certificates \
@@ -16,6 +17,7 @@ RUN apk update \
     chmod +x /etc/init-scripts/10php-fpm.sh
 
 ENV WWWROOT=public
+ENV FLAVOR=common
 
 EXPOSE 80
 VOLUME [ "/www", "/log" ]
