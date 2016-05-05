@@ -3,10 +3,10 @@
 DOCROOT=/www
 [ "${WWWROOT}" = "" ] || DOCROOT=/www/${WWWROOT}
 
-if [ ! -d ${DOCROOT} ] ; then
-	mkdir -p ${DOCROOT}
-	chgrp www-data ${DOCROOT}
-	chgrp 2770 ${DOCROOT}
+if [ "${WWWDATA_GROUPID}" != "" ]; then
+	sed -i "s/^www-data:x:[0-9]*:/www-data:x:${WWWDATA_GROUPID}:/" /etc/group
+	chgrp www-data /www
+	chmod g+sx,o-rwx /www
 fi
 
 sed -i "s,__DOCROOT__,${DOCROOT}," /etc/nginx/nginx.conf

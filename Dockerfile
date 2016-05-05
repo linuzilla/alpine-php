@@ -18,6 +18,7 @@ RUN apk update \
 
 ENV WWWROOT=public
 ENV FLAVOR=common
+ENV WWWDATA_GROUPID=
 
 EXPOSE 80
-VOLUME [ "/www", "/log" ]
+#VOLUME [ "/www", "/log" ]
