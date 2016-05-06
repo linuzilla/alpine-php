@@ -9,13 +9,20 @@ if [ "${WWWDATA_GROUPID}" != "" ]; then
 	chmod g+sx,o-rwx /www
 fi
 
-sed -i "s,__DOCROOT__,${DOCROOT}," /etc/nginx/nginx.conf
-sed -i "s,__DOCROOT__,${DOCROOT}," /etc/php/php-fpm.conf
-
 if [ -f /etc/settings.d/${FLAVOR}/php.ini ]; then
 	cp -f /etc/settings.d/${FLAVOR}/php.ini /etc/php/php.ini
 	chmod 644 /etc/php/php.ini
 fi
+
+if [ -d /etc/settings.d/${FLAVOR}/conf.d ]; then
+	if [ -f /etc/settings.d/${FLAVOR}/nginx.conf ]; then
+		cp -f /etc/settings.d/${FLAVOR}/nginx.conf /etc/nginx/
+	fi
+	cp -f /etc/settings.d/${FLAVOR}/conf.d/* /etc/nginx/conf.d/
+fi
+
+sed -i "s,__DOCROOT__,${DOCROOT}," /etc/nginx/nginx.conf
+sed -i "s,__DOCROOT__,${DOCROOT}," /etc/php/php-fpm.conf
 
 # start nginx
 #mkdir -p /www/logs/nginx
