@@ -24,6 +24,10 @@ fi
 sed -i "s,__DOCROOT__,${DOCROOT}," /etc/nginx/nginx.conf
 sed -i "s,__DOCROOT__,${DOCROOT}," /etc/php/php-fpm.conf
 
+if [ -x /etc/settings.d/scripts/init.sh ]; then
+	/etc/settings.d/scripts/init.sh
+fi
+
 # start nginx
 #mkdir -p /www/logs/nginx
 mkdir -p /tmp/nginx

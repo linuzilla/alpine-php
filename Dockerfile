@@ -10,7 +10,7 @@ COPY files/supervisord-phpfpm.conf /etc/supervisor.d/php-fpm.conf
 RUN apk update \
     && apk add nginx ca-certificates \
     php-fpm php-json php-zlib php-xml php-pdo php-phar php-openssl \
-    php-pdo_mysql php-mysqli php-mysql \
+    php-pdo_mysql php-mysqli php-mysql php-bcmath \
     php-gd php-iconv php-mcrypt; \
     apk add -u musl; \
     rm -rf /var/cache/apk/* && rm -rf /tmp/src; \
